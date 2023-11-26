@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Button from "../Button";
 
@@ -29,6 +29,11 @@ const Modal: React.FC<ModalProps> = ({
   secondaryActionLabel,
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
+
+  useEffect(() => {
+    setShowModal(isOpen)
+  },[isOpen])
+
   const handleClose = useCallback(() => {
     if (disabled) {
       return;
@@ -38,12 +43,24 @@ const Modal: React.FC<ModalProps> = ({
       onClose();
     }, 300);
   }, [disabled, onClose]);
+
   const handleSubmit = useCallback(() => {
     if (disabled) {
       return;
     }
     onSubmit();
   }, [disabled, onSubmit]);
+
+  const handleSecondaryAction = useCallback(() => {
+    if (disabled || secondaryAction) {
+      return;
+    }
+    secondaryAction();
+  }, [disabled, secondaryAction]);
+
+if(!isOpen){
+    return null
+}
 
   return (
     <>
@@ -60,7 +77,7 @@ const Modal: React.FC<ModalProps> = ({
             {/* Header */}
             <div className="flex items-center p-6 rounded-t justify-center relative border-b-[1px]">
               <button
-                //   onClick={handleClose}
+                  onClick={handleClose}
                 className="p-1 border-0 hover:opacity-70 transition absolute left-9"
               >
                 <IoMdClose size={18} />
