@@ -77,7 +77,7 @@ if(!isOpen){
             {/* Header */}
             <div className="flex items-center p-6 rounded-t justify-center relative border-b-[1px]">
               <button
-                  onClick={handleClose}
+                onClick={handleClose}
                 className="p-1 border-0 hover:opacity-70 transition absolute left-9"
               >
                 <IoMdClose size={18} />
@@ -93,7 +93,7 @@ if(!isOpen){
                   <Button
                     outline
                     label={secondaryActionLabel}
-                    // onClick={handleSecondaryAction}
+                    onClick={handleSecondaryAction}
                     disabled={disabled}
                   />
                 )}
@@ -104,6 +104,7 @@ if(!isOpen){
                   onClick={handleSubmit}
                 />
               </div>
+              {footer}
             </div>
           </div>
         </div>
